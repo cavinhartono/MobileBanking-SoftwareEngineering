@@ -1,18 +1,39 @@
-## Getting Started
+## Mobile Banking - Rekayasa Perangkat Lunak tahun 2024/2025
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+NIM: 362379011
 
-## Folder Structure
+Nama: Muhammad Cavin Hartono Putra
 
-The workspace contains two folders by default, where:
+Program Studi: Teknik Informatika
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Fitur
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- Login/Register Nasabah berdasarkan Nomor Telepon dan PIN
+- Transaksi Setor Tunai dan Tarik Tunai
+- Transfer antar rekening (simulasi rekening tujuan)
+- Pembayaran Tagihan (dengan id tagihan dan metode)
+- Penyimpanan Data dalam file .txt (nasabah dan bank)
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Teknologi yang digunakan
 
-## Dependency Management
+- Java 17
+- CLI Console
+- File I/O untuk simpan/muat data
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Run
+
+1. Pastikan nasabah.txt dan bank.txt berada di folder data/
+
+2. Compile semua file Java:
+
+```
+javac Main.java model/*.java util/*.java
+```
+
+3. Jalankan aplikasi:
+
+```
+java App
+```
+
+_Lisensi: Proyek ini bersifat open-source dan bebas dimodifikasi untuk tujuan pembelajaran._
