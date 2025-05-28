@@ -6,12 +6,27 @@ import java.util.List;
 import transaction.Transaksi;
 
 public class Bank {
+  private String id;
   private String nama;
-  private List<Nasabah> daftarNasabah;
+  private List<Nasabah> daftarNasabah = new ArrayList<>();
 
-  public Bank(String nama) {
+  public Bank(String id, String nama) {
+    this.id = id;
     this.nama = nama;
-    this.daftarNasabah = new ArrayList<>();
+  }
+
+  public Nasabah cariNasabah(String nomorTelepon) {
+    for (Nasabah nasabah : daftarNasabah) {
+      if (nasabah.getNomorTelepon().equals(nomorTelepon)) {
+        return nasabah;
+      }
+    }
+
+    return null;
+  }
+
+  public List<Nasabah> getNasabahList() {
+    return daftarNasabah;
   }
 
   public void tambahNasabah(Nasabah nasabah) {

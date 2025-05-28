@@ -9,14 +9,15 @@ public class Nasabah {
   private String pin;
   private double saldo;
 
-  public Nasabah(String nik, String namaLengkap, String nomorTelepon, String email, String password, String pin) {
+  public Nasabah(String nik, String namaLengkap, String nomorTelepon, String email, String password, String pin,
+      double saldo) {
     this.nik = nik;
     this.namaLengkap = namaLengkap;
     this.nomorTelepon = nomorTelepon;
     this.email = email;
     this.password = password;
     this.pin = pin;
-    this.saldo = 0.0;
+    this.saldo = saldo;
   }
 
   public boolean login(String pin) {
@@ -39,6 +40,10 @@ public class Nasabah {
     return saldo;
   }
 
+  public String getNomorTelepon() {
+    return nomorTelepon;
+  }
+
   public void tambahSaldo(double jumlah) {
     this.saldo += jumlah;
   }
@@ -54,5 +59,10 @@ public class Nasabah {
 
   public void updatePin(String newPin) {
     this.pin = newPin;
+  }
+
+  @Override
+  public String toString() {
+    return namaLengkap + " - " + nomorTelepon + " - Saldo: " + saldo;
   }
 }
