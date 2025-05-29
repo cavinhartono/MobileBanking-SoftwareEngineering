@@ -1,0 +1,6 @@
+Id;Nama
+001;Blu by BCA Digital
+002;Bank BCA
+003;Mandiri
+004;BRI
+005;BNI
