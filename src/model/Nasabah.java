@@ -11,7 +11,6 @@ public class Nasabah {
 
   public Nasabah(String nik, String namaLengkap, String nomorTelepon, String email, String password, String pin,
       double saldo) {
-    this.nik = nik;
     this.namaLengkap = namaLengkap;
     this.nomorTelepon = nomorTelepon;
     this.email = email;
