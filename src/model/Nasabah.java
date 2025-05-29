@@ -1,5 +1,11 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Tagihan;
+import transaction.Transaksi;
+
 public class Nasabah {
   private String nik;
   private String namaLengkap;
@@ -8,6 +14,9 @@ public class Nasabah {
   private String password;
   private String pin;
   private double saldo;
+
+  private List<Transaksi> riwayatTransaksi = new ArrayList<>();
+  private List<Tagihan> tagihanList = new ArrayList<>();
 
   public Nasabah(String nik, String namaLengkap, String nomorTelepon, String email, String password, String pin,
       double saldo) {
@@ -58,6 +67,22 @@ public class Nasabah {
 
   public void updatePin(String newPin) {
     this.pin = newPin;
+  }
+
+  public List<Transaksi> getRiwayatTransaksi() {
+    return riwayatTransaksi;
+  }
+
+  public List<Tagihan> getTagihanList() {
+    return tagihanList;
+  }
+
+  public void tambahTransaksi(Transaksi transaksi) {
+    riwayatTransaksi.add(transaksi);
+  }
+
+  public void tambahTagihan(Tagihan tagihan) {
+    tagihanList.add(tagihan);
   }
 
   @Override

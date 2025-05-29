@@ -16,4 +16,20 @@ public class Tagihan {
   public boolean bayar() {
     return !isBayar ? true : false;
   }
+
+  public String getId() {
+    return id;
+  }
+
+  public String getJenis() {
+    return jenis;
+  }
+
+  public double getJumlah() {
+    return jumlah;
+  }
+
+  public boolean isBayar() {
+    return isBayar;
+  }
 }
