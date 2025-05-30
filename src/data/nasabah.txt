@@ -1,2 +1,3 @@
 NIK;Nama Lengkap;Nomor Telepon;Email;Password;PIN;Jumlah Saldo
 1234567890123456;John Doe;081234567890;john@example.com;pass123;2505;500000
+00001234;Cavin Hartono;081234561234;cavin@gmail.com;cavin;2505;250000
