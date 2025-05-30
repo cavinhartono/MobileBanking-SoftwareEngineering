@@ -1,8 +1,7 @@
 import model.*;
 import transaction.*;
-import util.FileHelper;
+import util.*;
 
-import java.text.*;
 import java.util.*;
 
 /**
@@ -23,24 +22,13 @@ public class Main {
     double jumlah;
     int choice;
 
-    DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-    DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
-
-    formatRp.setCurrencySymbol("Rp. ");
-    formatRp.setMonetaryDecimalSeparator(',');
-    formatRp.setGroupingSeparator('.');
-    kursIndonesia.setDecimalFormatSymbols(formatRp);
-
     for (Nasabah nasabah : nasabahList) {
       bank.tambahNasabah(nasabah);
     }
 
-    System.out.println(bank.getNasabahList().size());
-
     App app = new App();
 
-    System.out.println("Selamat Datang!");
-    System.out.println("BluBCA");
+    System.out.println("Selamat Datang di BluBCA!");
 
     System.out.print("Masukan nomor telepon : ");
     String nomorTelepon = ip.nextLine();
@@ -66,12 +54,29 @@ public class Main {
     }
 
     do {
-      System.out.println("Saldo saya: " + kursIndonesia.format(app.getNasabah().getSaldo()));
-      System.out.println("1. Transfer Dana\n2. Setor Tunai\n3. Tarik Tunai\n4.Beli T\n5. Keluar");
+      System.out.println("Saldo saya: " + CurrencyFormatter.toRupiah(app.getNasabah().getSaldo()));
+      System.out.println(
+          "1. Transfer Dana\n2. Setor Tunai\n3. Tarik Tunai\n4. Bayar Tagihan\n5. List Tagihan\n6. Lihat Riwayat Transaksi\n7. Keluar");
       System.out.print("Pilih Menu: ");
       choice = ip.nextInt();
       switch (choice) {
         case 1:
+          System.out.print("Masukan Nomor Tujuan  : ");
+          String tujuanRekening = ip.nextLine();
+          System.out.print("Jumlah                : ");
+          jumlah = ip.nextDouble();
+          ip.nextLine();
+          System.out.print("Catatan               : ");
+          String catatanKecil = ip.nextLine();
+
+          if (bank.cariNasabah(tujuanRekening) != null) {
+            System.out.println(
+                app.buatTransaksi(new Transfer(UUID.randomUUID().toString(), jumlah, tujuanRekening, catatanKecil))
+                    ? "Transfer berhasil!"
+                    : "Saldo tidak mencukupi.");
+          } else {
+            System.out.println("Nasabah tujuan tidak ditemukan.");
+          }
           break;
         case 2:
           System.out.print("Masukan jumlah setor: ");
@@ -85,10 +90,26 @@ public class Main {
               ? "Berhasil tarik tunai!"
               : "Saldo tidak mencukupi.");
           break;
+        case 4:
+
+          break;
+        case 5:
+          List<Transaksi> riwayat = app.getNasabah().getRiwayatTransaksi();
+          if (riwayat.isEmpty()) {
+            System.out.println("Belum ada transaksi");
+          } else {
+            for (Transaksi transaksi : riwayat) {
+              System.out.println(
+                  transaksi.getClass().getSimpleName() + " - " + transaksi.getJumlah() + transaksi.getTanggal());
+            }
+          }
+          break;
+        case 6:
+          break;
         default:
           System.err.println("Keluar...");
           break;
       }
-    } while (choice != 4);
+    } while (choice != 7);
   }
 }
