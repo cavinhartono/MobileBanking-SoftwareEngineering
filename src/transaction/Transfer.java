@@ -6,7 +6,7 @@ public class Transfer extends Transaksi {
   private String tujuanRekening;
   private String catatan;
 
-  public Transfer(String id, double jumlah, String rekeningTujuan, String catatan) {
+  public Transfer(String id, double jumlah, String tujuanRekening, String catatan) {
     super(id, jumlah);
     this.tujuanRekening = tujuanRekening;
     this.catatan = catatan;

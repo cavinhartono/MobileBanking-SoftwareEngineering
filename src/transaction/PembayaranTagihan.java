@@ -4,17 +4,20 @@ import model.Nasabah;
 import model.Tagihan;
 
 public class PembayaranTagihan extends Transaksi {
-  private Tagihan tagihan;
+  private String idTagihan;
+  private String metodePembayaran;
 
-  public PembayaranTagihan(String id, double jumlah, Tagihan tagihan) {
+  public PembayaranTagihan(String id, double jumlah, String idTagihan, String metodePembayaran) {
     super(id, jumlah);
-    this.tagihan = tagihan;
+    this.idTagihan = idTagihan;
+    this.metodePembayaran = metodePembayaran;
   }
 
   @Override
   public boolean proses(Nasabah nasabah) {
-    if (nasabah.kurangiSaldo(jumlah)) {
-      tagihan.bayar();
+    if (nasabah.getSaldo() >= jumlah) {
+      nasabah.kurangiSaldo(jumlah);
+      nasabah.tambahTransaksi(this);
       return true;
     }
     return false;
