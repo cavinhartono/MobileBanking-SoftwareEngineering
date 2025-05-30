@@ -91,9 +91,42 @@ public class Main {
               : "Saldo tidak mencukupi.");
           break;
         case 4:
+          List<Tagihan> tagihan = app.getNasabah().getTagihanList();
+          for (int i = 0; i < tagihan.size(); i++) {
+            Tagihan t = tagihan.get(i);
+            System.out
+                .println(i + ". " + t.getJenis() + " - " + t.getJumlah() + " - " + (t.isBayar() ? "Lunas" : "Belum"));
+          }
+          System.out.print("Pilih tagihan: ");
+          int index = ip.nextInt();
+          ip.nextLine();
 
+          if (index >= 0 && index < tagihan.size()) {
+            Tagihan t = tagihan.get(index);
+            if (!t.isBayar()) {
+              PembayaranTagihan pt = new PembayaranTagihan(UUID.randomUUID().toString(), t.getJumlah(), t.getId(),
+                  "Saldo");
+
+              if (app.buatTransaksi(pt)) {
+                t.bayar();
+                System.out.println("Tagihan berhasil dibayar!");
+              } else {
+                System.out.println("Saldo tidak cukup untuk membayar tagihan.");
+              }
+            } else {
+              System.out.println("Tagihan sudah lunas");
+            }
+          }
           break;
         case 5:
+          if (app.getNasabah().getTagihanList().isEmpty()) {
+            System.out.println("Tidak ada tagihan.");
+          } else
+            for (Tagihan t : app.getNasabah().getTagihanList())
+              System.out.println(
+                  t.getJumlah() + " - " + t.getJenis() + " - " + (t.isBayar() ? "Sudah bayar" : "Belum bayar"));
+          break;
+        case 6:
           List<Transaksi> riwayat = app.getNasabah().getRiwayatTransaksi();
           if (riwayat.isEmpty()) {
             System.out.println("Belum ada transaksi");
@@ -103,8 +136,6 @@ public class Main {
                   transaksi.getClass().getSimpleName() + " - " + transaksi.getJumlah() + transaksi.getTanggal());
             }
           }
-          break;
-        case 6:
           break;
         default:
           System.err.println("Keluar...");
