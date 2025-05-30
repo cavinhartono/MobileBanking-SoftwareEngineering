@@ -15,5 +15,13 @@ public abstract class Transaksi {
     this.tanggal = new Date();
   }
 
+  public Date getTanggal() {
+    return tanggal;
+  }
+
+  public double getJumlah() {
+    return jumlah;
+  }
+
   public abstract boolean proses(Nasabah nasabah);
 }
